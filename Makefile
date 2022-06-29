@@ -1,6 +1,6 @@
 EXE = game
 
-OBJS_EXE = main.o alphabet.o gamePlay.o driver.o
+OBJS_EXE = main.o alphabet.o gamePlay.o driver.o consoleUI.o
 
 CXX = clang++
 CXXFLAGS = -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic 
@@ -14,10 +14,13 @@ $(EXE) : $(OBJS_EXE)
 	$(LD) $(OBJS_EXE) $(LDFLAGS) -o $(EXE)
 
 #object files
+consoleUI.o : ui/consoleUI.cpp ui/consoleUI.h
+	$(CXX) $(CXXFLAGS) ui/consoleUI.cpp -o $@
+
 driver.o : driver.cpp driver.h
 	$(CXX) $(CXXFLAGS) driver.cpp -o $@
 
-gamePlay.o : gamePlay.cpp gamePlay.h alphabet.h driver.h
+gamePlay.o : gamePlay.cpp gamePlay.h alphabet.h driver.h ui/consoleUI.h
 	$(CXX) $(CXXFLAGS) gamePlay.cpp -o $@
 
 alphabet.o : alphabet.cpp alphabet.h

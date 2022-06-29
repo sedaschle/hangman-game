@@ -1,5 +1,6 @@
 #include <iostream>
 #include "gamePlay.h"
+
 //#include "driver.h"
 
 string uniq;
@@ -16,6 +17,9 @@ gamePlay::gamePlay(string s) {
     driver* d = new driver();
     drive = *d;
 
+    consoleUI* c = new consoleUI(s);
+    console = *c;
+
     uniq = "";
     soln = "_____";
     uniques(s);
@@ -23,31 +27,29 @@ gamePlay::gamePlay(string s) {
     play();
 }
 
-// play with limit
-gamePlay::gamePlay(string s, int l) {
-    alphabet* a = new alphabet(s);
-    key = *a;
-    driver* d = new driver();
-    drive = *d;
-    limit = l;
-    uniq = "";
-    uniques(s);
+// // play with limit
+// gamePlay::gamePlay(string s, int l) {
+//     alphabet* a = new alphabet(s);
+//     key = *a;
+//     driver* d = new driver();
+//     drive = *d;
+//     limit = l;
+//     uniq = "";
+//     uniques(s);
 
-    play();
-}
+//     play();
+// }
 
 
 void gamePlay::round(){
-    char x = drive.getGuess();
+    char x = console.playRound();
     guess(x);
 }
 
 void gamePlay::guess(char c){
-    cout << "guessed: " << c << endl;
     if (!key.letGuessed(c)){
         key.markGuessed(c);
         if (uniq.find(c) != string::npos) {
-            cout << "noiceee!! got one, with " << c << endl;
             vector<int> locs = key.getLetOcc(c);
 
             for (int i : locs) {
@@ -55,10 +57,11 @@ void gamePlay::guess(char c){
                 st.push_back(c);
                 soln.replace(i, 1, st);
             }
-            cout << "answer so far is: " << soln << endl;
+            console.postRound(true, soln);
 
         }
-    } else cout << "you already guessed that :(" << endl;
+        else console.postRound(false, soln);
+    } else cout << "you already guessed that :(" << endl; // get this out eventually
 }
 
 bool gamePlay::done(){
@@ -74,11 +77,12 @@ bool gamePlay::done(){
     return true;
 }
 void gamePlay::play() {
-    cout << uniq << endl;
+    console.start();
+
     while (!done()) {
         round();
     }
-    cout << "game over you got it!" << endl;
+    console.over();
 }
 
 void gamePlay::uniques(string s) {

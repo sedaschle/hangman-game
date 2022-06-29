@@ -3,6 +3,7 @@
 
 #include "alphabet.h"
 #include "driver.h"
+#include "ui/consoleUI.h"
 #include <vector>
 #include <cmath>
 #include <string>
@@ -15,12 +16,13 @@ class gamePlay {
 public:
     gamePlay();
     gamePlay(string s);
-    gamePlay(string s, int l);
+    // gamePlay(string s, int l);
 
     int limit;
     string uniq;
     alphabet key;
     driver drive;
+    consoleUI console;
 
     void round();
     void guess(char c);
