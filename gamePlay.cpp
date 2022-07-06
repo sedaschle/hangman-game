@@ -21,12 +21,18 @@ gamePlay::gamePlay(string s) {
     console = *c;
 
     uniq = "";
-    soln = "_____";
+    char m;
+
+    m = '_';
+    int l = s.size();
+    soln = string(l, m);
+
     uniques(s);
 
     play();
 }
 
+// TODO
 // // play with limit
 // gamePlay::gamePlay(string s, int l) {
 //     alphabet* a = new alphabet(s);
@@ -46,6 +52,7 @@ void gamePlay::round(){
     guess(x);
 }
 
+// TODO: remove cout statement, put in UI
 void gamePlay::guess(char c){
     if (!key.letGuessed(c)){
         key.markGuessed(c);

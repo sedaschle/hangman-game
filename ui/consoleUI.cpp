@@ -15,16 +15,16 @@ consoleUI::consoleUI(string s){
 }
 
 void consoleUI::start(){
-    cout << "Welcome to Hell" << endl;
+    cout << "Welcome to Hangman" << endl;
     cout << "The word you are trying to guess is " << answer.size();
-    cout << " letters long. Good luck -> if you fail i DIE! >:)" << endl;
+    cout << " letters long. Good luck!" << endl;
 
 }
 
 char consoleUI::playRound() {
     char ret;
 
-    cout << "What is your guess?" << endl;
+    cout << "What letter do you guess?" << endl;
 
     cin >> ret;
 
@@ -37,13 +37,13 @@ void consoleUI::postRound(bool b, string s){
         cout << "Word: " << s << endl;
     }
     else {
-        cout << "get it together dummy" << endl;
+        cout << "Sorry - that's not right!" << endl;
     }
 }
 
 void consoleUI::over(){
-    cout << "game over i SSURVIVEDDD!!!\n";
-    cout << "the word was " << answer << endl;
+    cout << "Game over - you saved me!\n";
+    cout << "The word was " << answer << endl;
 
 }
 

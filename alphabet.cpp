@@ -30,14 +30,11 @@ void alphabet::initAnswer(){
 	for (int i = 0; i < word.size(); i++) {
 		targ = letters.find(word[i]);
 		targ->second.occurs.push_back(i);
-	//	letters[alf.substr(i, 1)]
 	}
 }
 
 // mark a given letter in alphabet as "guessed"
 void alphabet::markGuessed(char c){
-//	map<string, letter>::iterator it;
-	//it = letters.find(c);
 	it here;
 	here = letters.find(c);
 
@@ -48,7 +45,6 @@ void alphabet::markGuessed(char c){
 
 // iterate through map, return letters that have been guessed so far
 string alphabet::getGuessed(){
-//	map<string, letter>::iterator it;
 	it here;
 	string guesses = "";
 
